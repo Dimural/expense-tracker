@@ -1,5 +1,6 @@
 package com.expensetracker.expensetracker.category;
 
-public class CategoryController {
-    
+public enum CategoryTypes {
+    INCOME,
+    EXPENSE
 }
