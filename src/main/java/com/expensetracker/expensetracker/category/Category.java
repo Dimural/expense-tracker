@@ -5,6 +5,7 @@ import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import com.expensetracker.expensetracker.user.User;
 
 @Entity
 public class Category {
