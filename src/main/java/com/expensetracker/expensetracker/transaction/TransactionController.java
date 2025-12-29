@@ -3,7 +3,6 @@ package com.expensetracker.expensetracker.transaction;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +35,7 @@ public class TransactionController {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No user found in database"));
 
-       //this cannot be made yet, it needs the authentication stuff and blah blah blah. it is supposesd to get the current logged in user
-       // I just made it get first user, THIS CODE IS INCORRECT BUT TEMPORARY DO NOT FORGET HAHAHAHAAAHAHAHAHAHAHA
+       //this cannot be made yet, same as the getCurrentUser in CategoryController.java
     }
 
     @PostMapping
