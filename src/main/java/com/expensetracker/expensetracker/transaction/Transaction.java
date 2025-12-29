@@ -5,9 +5,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.expensetracker.expensetracker.category.Category;
 import com.expensetracker.expensetracker.user.User;
 
-import java.util.Locale.Category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
