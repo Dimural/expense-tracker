@@ -10,12 +10,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     
-    UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    User createUser(String email, String rawPassword) {
+    public User createUser(String email, String rawPassword) {
 
         String normalizedEmail = email.trim().toLowerCase();
 
@@ -33,12 +33,12 @@ public class UserService {
 
     }
 
-    Optional<User> getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         String normalizedEmail = email.trim().toLowerCase();
         return userRepository.findByEmail(normalizedEmail);
     }
 
-    boolean checkPassword(User user, String rawPassword) {
+    public boolean checkPassword(User user, String rawPassword) {
         return passwordEncoder.matches(rawPassword, user.getPasswordHash());
     }
     
