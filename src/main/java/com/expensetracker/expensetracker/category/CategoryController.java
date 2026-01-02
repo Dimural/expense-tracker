@@ -11,6 +11,7 @@ import com.expensetracker.expensetracker.category.dto.CategoryResponseDto;
 import com.expensetracker.expensetracker.category.dto.CreateCategoryDto;
 import com.expensetracker.expensetracker.user.User;
 import com.expensetracker.expensetracker.user.UserRepository;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -42,6 +43,7 @@ public class CategoryController {
         //However the above code is correct and is supposed to work once the authentication stuff is done
     }
 
+    @GetMapping
     public List<CategoryResponseDto> list() {
         User user = getCurrentUser();
         return categoryService.getCategoriesForUser(user);
