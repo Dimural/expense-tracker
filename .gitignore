@@ -35,5 +35,16 @@ build/
 ### Database info ###
 src/main/resources/application.properties
 
+# macOS
+.DS_Store
+**/.DS_Store
+
+# IDE / editor stuff (optional but nice)
+.vscode/
+.idea/
+
+# Build artifacts
+target/
+
 ### random secret for jwt ###
 application-local.properties
