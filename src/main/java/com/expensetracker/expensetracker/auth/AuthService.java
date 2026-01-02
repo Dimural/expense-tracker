@@ -8,9 +8,11 @@ import java.util.Optional;
 @Service
 public class AuthService { 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
 
-    public AuthService(UserService userService) {
+    public AuthService(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     public AuthResponse register(RegisterRequest request) {
@@ -37,6 +39,8 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        return new AuthResponse("Login successful");
+        String token = jwtUtil.generateToken(user.getEmail());
+        return new AuthResponse("Login successful", token);
+
     }
 }

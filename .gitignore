@@ -34,3 +34,6 @@ build/
 
 ### Database info ###
 src/main/resources/application.properties
+
+### random secret for jwt ###
+application-local.properties
