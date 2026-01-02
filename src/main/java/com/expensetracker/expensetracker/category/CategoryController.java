@@ -11,6 +11,9 @@ import com.expensetracker.expensetracker.category.dto.CategoryResponseDto;
 import com.expensetracker.expensetracker.category.dto.CreateCategoryDto;
 import com.expensetracker.expensetracker.user.User;
 import com.expensetracker.expensetracker.user.UserRepository;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -24,14 +27,15 @@ public class CategoryController {
     }
     
     private User getCurrentUser() {
-
-        return userRepository.findAll().stream()
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No user found in database"));
-
-       //this cannot be made yet, it needs the authentication stuff and blah blah blah. it is supposesd to get the current logged in user
-       // I just made it get first user, THIS CODE IS INCORRECT BUT TEMPORARY DO NOT FORGET HAHAHAHAAAHAHAHAHAHAHA
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+    
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found: " + email));
     }
+    
 
     @PostMapping
     public CategoryResponseDto create(@RequestBody CreateCategoryDto dto) {
@@ -42,6 +46,7 @@ public class CategoryController {
         //However the above code is correct and is supposed to work once the authentication stuff is done
     }
 
+    @GetMapping
     public List<CategoryResponseDto> list() {
         User user = getCurrentUser();
         return categoryService.getCategoriesForUser(user);

@@ -45,3 +45,6 @@ src/main/resources/application.properties
 
 # Build artifacts
 target/
+
+### random secret for jwt ###
+application-local.properties

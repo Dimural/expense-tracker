@@ -20,6 +20,8 @@ import com.expensetracker.expensetracker.user.UserRepository;
 
 import jakarta.validation.Valid;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
@@ -31,13 +33,15 @@ public class TransactionController {
         this.userRepository = userRepository;
     }
     private User getCurrentUser(){
-        return userRepository.findAll().stream()
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No user found in database"));
-
-       //this cannot be made yet, same as the getCurrentUser in CategoryController.java
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+    
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found: " + email));
     }
-
+    
     @PostMapping
     public TransactionResponseDto createTransation(@Valid @RequestBody CreateTransactionDto dto){
         User user = getCurrentUser();
