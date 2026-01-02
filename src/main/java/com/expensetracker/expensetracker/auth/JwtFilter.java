@@ -30,15 +30,12 @@ public class JwtFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
-        System.out.println("JwtFilter: Authorization header = " + authHeader);
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-            System.out.println("JwtFilter: token (first 20 chars) = " + token.substring(0, Math.min(20, token.length())));
 
             if (jwtUtil.validateToken(token) && SecurityContextHolder.getContext().getAuthentication() == null) {
                 String email = jwtUtil.extractEmail(token);
-                System.out.println("JwtFilter: VALID token for email = " + email);
 
                 // We’re not doing roles/authorities yet, so empty list is fine for now
                 UsernamePasswordAuthenticationToken authentication =

@@ -45,10 +45,9 @@ public class JwtUtil {
             parseClaims(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            System.out.println("JwtUtil: validation failed -> " + e.getClass().getSimpleName() + ": " + e.getMessage());
             return false;
         }
-    }
+    }    
 
     private Claims parseClaims(String token) {
         return Jwts.parserBuilder()
